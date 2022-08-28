@@ -1,3 +1,5 @@
+#define MEM_SIZE 12
+
 #include <stdio.h>
 
 #include "common.h"
@@ -9,11 +11,20 @@
 int main()
 {
     MemoryIntf mem = {.size = memSize, .get = memGet, .set = memSet};
+    VM vm;
 
-    mem.set(0, LDA);
-    mem.set(1, 0);
-    mem.set(2, 0x12);
-    mem.set(3, 0xff);
+    printf("%d\n", mem.size());
 
-    dumpInst(&mem, 0);
+    vmInit(&vm, &mem);
+
+    instWrite(&mem, 0, LDA, 0x00, 0x00, 0x08);
+    instWrite(&mem, 4, STA, 0x00, 0x00, 0x09);
+    mem.set(8, 0xEA);
+    instDump(&mem, 0);
+    instDump(&mem, 4);
+
+    vmTick(&vm);
+    vmDumpRegs(&vm);
+
+    memDump(&mem);
 }

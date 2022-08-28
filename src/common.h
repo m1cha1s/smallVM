@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "error.h"
+
 #ifndef MEM_SIZE
 #define MEM_SIZE 512
 #endif

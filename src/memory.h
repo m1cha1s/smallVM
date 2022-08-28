@@ -2,20 +2,21 @@
 #define simplevm_memory_h
 
 #include "common.h"
+#include "inst.h"
 
 typedef struct _MemoryIntf
 {
     size_t (*size)();
-    int (*get)(uint32_t, uint8_t *);
-    int (*set)(uint32_t, uint8_t);
+    Error (*get)(uint32_t loc, uint8_t *val);
+    Error (*set)(uint32_t loc, uint8_t val);
 } MemoryIntf;
 
 #ifndef CUSTOM_MEMORY
-
 size_t memSize();
-int memGet(uint32_t loc, uint8_t *val);
-int memSet(uint32_t loc, uint8_t val);
-
+Error memGet(uint32_t loc, uint8_t *val);
+Error memSet(uint32_t loc, uint8_t val);
 #endif
+
+int instWrite(MemoryIntf *, uint32_t, Inst, uint8_t, uint8_t, uint8_t);
 
 #endif

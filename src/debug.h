@@ -4,7 +4,10 @@
 #include "common.h"
 #include "inst.h"
 #include "memory.h"
+#include "vm.h"
 
-int dumpInst(MemoryIntf *, uint32_t);
+Error instDump(MemoryIntf *, uint32_t);
+void vmDumpRegs(VM *);
+void memDump(MemoryIntf *);
 
 #endif

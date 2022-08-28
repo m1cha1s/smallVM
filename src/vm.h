@@ -11,10 +11,10 @@ typedef struct _VM
     uint8_t SP;
 
     // The memory interface
-    MemoryIntf memIntf;
+    MemoryIntf *memIntf;
 } VM;
 
-int loadProg(VM *, uint8_t *, size_t);
-void dumpMem(VM *);
+void vmInit(VM *, MemoryIntf *);
+Error vmTick(VM *);
 
 #endif
